@@ -2,7 +2,7 @@
 
 > An interactive civic education web app helping citizens understand the complete election process — from voter registration to final certification.
 
-🌐 **Live App:** [election-assistant-801744374074.asia-south1.run.app](https://election-assistant-801744374074.asia-south1.run.app/)
+🌐 **Live App:** [election-assistant-801744374074.us-central1.run.app](https://election-assistant-801744374074.us-central1.run.app/)
 
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
@@ -34,7 +34,7 @@
 | Fonts | Google Fonts — Playfair Display, DM Sans |
 | Server | Nginx 1.27 (Alpine) |
 | Container | Docker |
-| Hosting | Google Cloud Run (asia-south1 / Mumbai) |
+| Hosting | Google Cloud Run (us-central1 / Iowa) |
 
 ---
 
@@ -59,8 +59,7 @@ This project is containerized with Docker and deployed on **Google Cloud Run**.
 
 | Field | Value |
 |---|---|
-| GCP Project ID | `election-assistant-494118` |
-| Region | `asia-south1` (Mumbai) |
+| Region | `us-central1` (Iowa) |
 | Service Name | `election-assistant` |
 
 ### Deploy from Cloud Shell
@@ -73,8 +72,7 @@ cd Election-assistant
 # Deploy to Cloud Run
 gcloud run deploy election-assistant \
   --source . \
-  --project election-assistant-494118 \
-  --region asia-south1 \
+  --region us-central1 \
   --allow-unauthenticated
 ```
 
