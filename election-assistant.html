@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Election Process Guide</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d111a;
+      --surface: rgba(21, 27, 39, 0.86);
+      --surface2: rgba(31, 40, 58, 0.92);
+      --surface3: rgba(255, 255, 255, 0.045);
+      --border: rgba(255, 255, 255, 0.09);
+      --border2: rgba(255, 255, 255, 0.17);
+      --text: #f5f7fb;
+      --muted: #a0a9b8;
+      --accent: #d6b66f;
+      --accent2: #f1d58e;
+      --blue: #73a7ff;
+      --green: #47d99d;
+      --red: #ff7474;
+      --teal: #42c7ee;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+      --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+      --radius: 8px;
+      --body-grad-1: rgba(214, 182, 111, 0.08);
+      --body-grad-2: rgba(66, 199, 238, 0.08);
+      --body-start: #0f1420;
+      --body-mid: #0b0f18;
+      --body-end: #101721;
+      --grid-line: rgba(255, 255, 255, 0.035);
+      --panel-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+      --panel-soft: rgba(255, 255, 255, 0.08);
+      --accent-soft: rgba(214, 182, 111, 0.08);
+      --nav-bg: rgba(13, 17, 26, 0.82);
+      --nav-active-text: #10141d;
+      --sticky-bg: rgba(18, 24, 36, 0.88);
+      --dot-ring: rgba(13, 17, 26, 0.85);
+      --focus: rgba(214, 182, 111, 0.85);
+      --selection-bg: rgba(214, 182, 111, 0.28);
+    }
+
+    body[data-theme="light"] {
+      --bg: #f5f7fb;
+      --surface: rgba(255, 255, 255, 0.92);
+      --surface2: rgba(236, 241, 248, 0.96);
+      --surface3: rgba(12, 18, 30, 0.045);
+      --border: rgba(19, 30, 46, 0.12);
+      --border2: rgba(19, 30, 46, 0.2);
+      --text: #152033;
+      --muted: #647083;
+      --accent: #9a6b1f;
+      --accent2: #6d4a17;
+      --blue: #255fc7;
+      --green: #087f5b;
+      --red: #b42335;
+      --teal: #087f95;
+      --shadow: 0 18px 48px rgba(19, 30, 46, 0.14);
+      --card-shadow: 0 12px 32px rgba(19, 30, 46, 0.1);
+      --body-grad-1: rgba(214, 182, 111, 0.14);
+      --body-grad-2: rgba(66, 199, 238, 0.12);
+      --body-start: #f8fafc;
+      --body-mid: #edf3f8;
+      --body-end: #f6f0df;
+      --grid-line: rgba(19, 30, 46, 0.045);
+      --panel-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 245, 250, 0.88));
+      --panel-soft: rgba(19, 30, 46, 0.08);
+      --accent-soft: rgba(154, 107, 31, 0.1);
+      --nav-bg: rgba(255, 255, 255, 0.82);
+      --nav-active-text: #fffdf8;
+      --sticky-bg: rgba(255, 255, 255, 0.9);
+      --dot-ring: rgba(248, 250, 252, 0.92);
+      --focus: rgba(154, 107, 31, 0.9);
+      --selection-bg: rgba(154, 107, 31, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background grid pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 169, 110, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 169, 110, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(200, 169, 110, 0.3);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .header h1 span {
+      color: var(--accent);
+    }
+
+    .header p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .nav-btn {
+      padding: 9px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border2);
+      border-radius: 99px;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.25);
+      background: var(--surface2);
+    }
+
+    .nav-btn.active {
+      background: var(--accent);
+      color: #0e1117;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+    }
+
+    .timeline-spine {
+      position: absolute;
+      left: 23px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border2) 8%, var(--border2) 92%, transparent);
+    }
+
+    .phase {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .phase-dot-col {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 18px;
+    }
+
+    .phase-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--border2);
+      background: var(--surface);
+      position: relative;
+      z-index: 1;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .phase.done .phase-dot {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .phase.current .phase-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.2);
+    }
+
+    .phase.upcoming .phase-dot {
+      border-color: var(--border2);
+    }
+
+    .phase-card {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 4px;
+    }
+
+    .phase:hover .phase-card {
+      border-color: var(--border2);
+      background: var(--surface2);
+    }
+
+    .phase.current .phase-card {
+      border-color: rgba(200, 169, 110, 0.3);
+      background: rgba(200, 169, 110, 0.05);
+    }
+
+    .phase.done .phase-card {
+      border-color: rgba(62, 207, 142, 0.2);
+    }
+
+    .phase-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .phase-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .phase-number {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .phase-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .phase.current .phase-title {
+      color: var(--accent2);
+    }
+
+    .phase-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 99px;
+    }
+
+    .badge-done {
+      background: rgba(62, 207, 142, 0.15);
+      color: var(--green);
+    }
+
+    .badge-current {
+      background: rgba(200, 169, 110, 0.15);
+      color: var(--accent);
+    }
+
+    .badge-upcoming {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+    }
+
+    .phase-timing {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .phase.current .phase-timing {
+      color: var(--accent);
+    }
+
+    .phase-body {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .phase.expanded .phase-body {
+      display: block;
+    }
+
+    .phase-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .phase-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .detail-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+
+    .detail-pill strong {
+      display: block;
+      color: var(--text);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+
+    .detail-pill span {
+      color: var(--muted);
+    }
+
+    .phase-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .tag.blue {
+      border-color: rgba(74, 158, 255, 0.3);
+      color: var(--blue);
+      background: rgba(74, 158, 255, 0.07);
+    }
+
+    .tag.green {
+      border-color: rgba(62, 207, 142, 0.3);
+      color: var(--green);
+      background: rgba(62, 207, 142, 0.07);
+    }
+
+    .tag.amber {
+      border-color: rgba(200, 169, 110, 0.3);
+      color: var(--accent);
+      background: rgba(200, 169, 110, 0.07);
+    }
+
+    .tag.teal {
+      border-color: rgba(56, 189, 248, 0.3);
+      color: var(--teal);
+      background: rgba(56, 189, 248, 0.07);
+    }
+
+    .chevron {
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform 0.2s;
+      margin-left: 4px;
+    }
+
+    .phase.expanded .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border2);
+    }
+
+    .faq-item.open {
+      border-color: rgba(200, 169, 110, 0.25);
+    }
+
+    .faq-q {
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .faq-q:hover {
+      background: var(--surface2);
+    }
+
+    .faq-item.open .faq-q {
+      color: var(--accent2);
+    }
+
+    .faq-icon {
+      font-size: 18px;
+      color: var(--muted);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      transition: max-height 0.35s ease, padding 0.2s;
+      padding: 0 20px;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 20px 18px;
+    }
+
+    /* ── GLOSSARY ── */
+    .search-field {
+      position: relative;
+      max-width: 620px;
+      margin: 0 auto 10px;
+    }
+
+    .search-field .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .search-input,
+    .glossary-search {
+      width: 100%;
+      padding: 12px 18px 12px 44px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus,
+    .glossary-search:focus {
+      border-color: rgba(200, 169, 110, 0.5);
+    }
+
+    .search-input::placeholder,
+    .glossary-search::placeholder {
+      color: var(--muted);
+    }
+
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .gloss-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .gloss-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-1px);
+    }
+
+    .gloss-term {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+
+    .gloss-def {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .glossary-empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+      font-size: 14px;
+    }
+
+    /* ── QUIZ ── */
+    .quiz-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .quiz-progress-bar {
+      height: 3px;
+      background: var(--border2);
+      border-radius: 99px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .quiz-counter {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .quiz-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 28px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-opt {
+      padding: 14px 18px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      border-color: var(--border2);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .quiz-opt.correct {
+      background: rgba(62, 207, 142, 0.1);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .quiz-opt.wrong {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .quiz-opt:disabled {
+      cursor: default;
+    }
+
+    .quiz-feedback {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .quiz-feedback.show {
+      display: block;
+    }
+
+    .quiz-feedback.correct-fb {
+      background: rgba(62, 207, 142, 0.1);
+      border: 1px solid rgba(62, 207, 142, 0.2);
+      color: #7ee8be;
+    }
+
+    .quiz-feedback.wrong-fb {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.2);
+      color: #ffaaaa;
+    }
+
+    .quiz-next {
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #0e1117;
+      border: none;
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: none;
+    }
+
+    .quiz-next:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+    }
+
+    .quiz-next.show {
+      display: inline-block;
+    }
+
+    .quiz-result {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+
+    .quiz-result.show {
+      display: block;
+    }
+
+    .result-score {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .result-label {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .result-msg {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 28px;
+      line-height: 1.7;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .quiz-restart {
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #0e1117;
+      border: none;
+      border-radius: 99px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .quiz-restart:hover {
+      background: var(--accent2);
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist-intro {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .checklist-group {
+      margin-bottom: 28px;
+    }
+
+    .checklist-group-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .check-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .check-item:hover {
+      border-color: var(--border2);
+    }
+
+    .check-item.checked {
+      border-color: rgba(62, 207, 142, 0.25);
+      background: rgba(62, 207, 142, 0.05);
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border2);
+      background: var(--surface2);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-size: 12px;
+    }
+
+    .check-item.checked .check-box {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .check-text-wrap {
+      flex: 1;
+    }
+
+    .check-label {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .check-item.checked .check-label {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .check-sublabel {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .checklist-progress {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .checklist-prog-text {
+      flex: 1;
+    }
+
+    .checklist-prog-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .checklist-prog-bar {
+      height: 4px;
+      background: var(--border2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .checklist-prog-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 99px;
+      transition: width 0.3s;
+    }
+
+    .checklist-prog-count {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* UI refresh */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        linear-gradient(160deg, var(--body-grad-1) 0%, transparent 34%),
+        linear-gradient(20deg, var(--body-grad-2) 0%, transparent 32%),
+        linear-gradient(180deg, var(--body-start) 0%, var(--body-mid) 56%, var(--body-end) 100%);
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.92), transparent 78%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.92), transparent 78%);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible,
+    .phase:focus-visible,
+    .faq-q:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    ::selection {
+      background: var(--selection-bg);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 1120px;
+      padding: 32px 24px 72px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
+      align-items: center;
+      gap: 28px;
+      text-align: left;
+      margin-bottom: 22px;
+    }
+
+    .header-copy {
+      min-width: 0;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius);
+      background: var(--accent-soft);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .header h1 {
+      max-width: 720px;
+      letter-spacing: 0;
+    }
+
+    .header p {
+      margin: 0;
+      max-width: 660px;
+      color: var(--muted);
+    }
+
+    .hero-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--teal), var(--green));
+    }
+
+    .hero-panel-label,
+    .overview-kicker,
+    .section-kicker {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-panel-title {
+      margin-top: 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.08;
+    }
+
+    .hero-panel-meta {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-panel-bar {
+      height: 6px;
+      margin-top: 24px;
+      border-radius: 999px;
+      background: var(--panel-soft);
+      overflow: hidden;
+    }
+
+    .hero-panel-bar span {
+      display: block;
+      width: 50%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--accent));
+    }
+
+    .countdown-timer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(180px, 0.9fr);
+      align-items: center;
+      gap: 18px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .countdown-label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      margin-top: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface3);
+      overflow: hidden;
+    }
+
+    .countdown-unit {
+      min-width: 0;
+      padding: 12px 10px;
+      border-right: 1px solid var(--border);
+      background: transparent;
+    }
+
+    .countdown-unit:last-child {
+      border-right: 0;
+    }
+
+    .countdown-number {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .countdown-caption {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .utility-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      margin: 26px 0 0;
+      flex-wrap: wrap;
+    }
+
+    .utility-actions,
+    .checklist-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .control-btn,
+    .shortcut-card summary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .control-btn:hover,
+    .shortcut-card summary:hover {
+      background: var(--surface2);
+      border-color: var(--border2);
+      transform: translateY(-1px);
+    }
+
+    .button-icon,
+    .search-icon {
+      display: inline-flex;
+      width: 16px;
+      height: 16px;
+      color: currentColor;
+      flex-shrink: 0;
+    }
+
+    .button-icon svg,
+    .search-icon svg,
+    .overview-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .share-status,
+    .checklist-status,
+    .filter-meta {
+      min-height: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .share-status {
+      margin-top: 8px;
+      text-align: left;
+    }
+
+    .shortcut-card {
+      position: relative;
+    }
+
+    .shortcut-card summary {
+      list-style: none;
+    }
+
+    .shortcut-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .shortcut-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      z-index: 40;
+      display: grid;
+      gap: 8px;
+      width: min(330px, calc(100vw - 32px));
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .shortcut-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    kbd {
+      min-width: 24px;
+      padding: 3px 6px;
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 11px;
+      text-align: center;
+      box-shadow: inset 0 -1px 0 var(--border);
+    }
+
+    .filter-meta {
+      max-width: 620px;
+      margin: 0 auto 18px;
+    }
+
+    .checklist-actions {
+      margin: 0 0 10px;
+    }
+
+    .checklist-status {
+      margin-bottom: 18px;
+    }
+
+    .empty-state,
+    .glossary-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: 32px 20px;
+      font-size: 14px;
+      border: 1px dashed var(--border2);
+      border-radius: var(--radius);
+      background: var(--surface3);
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+      animation: fadeUp 0.6s 0.08s ease both;
+    }
+
+    .overview-card {
+      min-height: 118px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .overview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .overview-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--teal);
+      flex-shrink: 0;
+      opacity: 0.95;
+    }
+
+    .overview-card strong {
+      display: block;
+      margin-top: 12px;
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .overview-label {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .nav {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      justify-content: center;
+      gap: 4px;
+      width: min(100%, 760px);
+      max-width: 100%;
+      margin: 0 auto 34px;
+      padding: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 14px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      background: var(--surface3);
+    }
+
+    .nav-btn.active {
+      color: var(--nav-active-text);
+      box-shadow: 0 6px 18px rgba(214, 182, 111, 0.22);
+    }
+
+    .section {
+      scroll-margin-top: 96px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.75fr) minmax(260px, 0.55fr);
+      align-items: end;
+      gap: 34px;
+      margin-bottom: 26px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-heading h2 {
+      margin-top: 7px;
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      line-height: 1.06;
+      color: var(--text);
+    }
+
+    .section-heading p {
+      max-width: 440px;
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .timeline {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .timeline-spine {
+      left: 26px;
+      background: linear-gradient(to bottom, transparent, rgba(214, 182, 111, 0.28) 8%, rgba(255, 255, 255, 0.12) 88%, transparent);
+    }
+
+    .phase {
+      gap: 22px;
+      margin-bottom: 14px;
+    }
+
+    .phase-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .phase-card,
+    .faq-item,
+    .gloss-card,
+    .quiz-card,
+    .check-item,
+    .checklist-progress,
+    .detail-pill,
+    .quiz-opt,
+    .quiz-feedback {
+      border-radius: var(--radius);
+    }
+
+    .phase-card {
+      padding: 20px 22px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .phase:hover .phase-card {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+    }
+
+    .phase.current .phase-card {
+      background: linear-gradient(180deg, rgba(214, 182, 111, 0.1), rgba(214, 182, 111, 0.035));
+      box-shadow: 0 18px 48px rgba(214, 182, 111, 0.08);
+    }
+
+    .phase-dot {
+      width: 18px;
+      height: 18px;
+      box-shadow: 0 0 0 5px var(--dot-ring);
+    }
+
+    .phase-title {
+      font-size: 20px;
+      margin-top: 4px;
+    }
+
+    .phase-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .phase-body {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .detail-pill,
+    .quiz-opt,
+    .check-item {
+      background: var(--surface3);
+    }
+
+    .detail-pill strong {
+      color: var(--accent2);
+    }
+
+    .faq-list,
+    .quiz-wrap,
+    #tab-checklist {
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq-item,
+    .gloss-card,
+    .quiz-card,
+    .checklist-progress {
+      box-shadow: var(--card-shadow);
+    }
+
+    .faq-q {
+      min-height: 58px;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .search-field {
+      display: block;
+      max-width: 620px;
+      margin: 0 auto 22px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+    }
+
+    .glossary-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .gloss-card {
+      min-height: 146px;
+    }
+
+    .quiz-progress-bar,
+    .checklist-prog-bar {
+      background: rgba(255, 255, 255, 0.11);
+    }
+
+    .quiz-progress-fill {
+      background: linear-gradient(90deg, var(--accent), var(--teal));
+    }
+
+    .quiz-next,
+    .quiz-restart {
+      border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(214, 182, 111, 0.2);
+    }
+
+    .quiz-opt {
+      color: var(--muted);
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      transform: translateX(2px);
+    }
+
+    .checklist-progress {
+      position: sticky;
+      top: 72px;
+      z-index: 8;
+      background: var(--sticky-bg);
+      backdrop-filter: blur(14px);
+    }
+
+    .checklist-prog-fill {
+      background: linear-gradient(90deg, var(--green), var(--teal));
+    }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 52px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .footer-link:hover {
+      color: var(--accent2);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .header {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: 18px;
+      }
+
+      .hero-panel {
+        width: 100%;
+      }
+
+      .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .section-heading p {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .app {
+        padding: 24px 16px 56px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .header-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .header-copy .utility-bar {
+        justify-content: center;
+        margin-top: 22px;
+      }
+
+      .header p {
+        margin: 0 auto;
+      }
+
+      .header h1 {
+        font-size: 34px;
+      }
+
+      .hero-panel {
+        text-align: left;
+      }
+
+      .countdown-timer {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .countdown-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .utility-bar {
+        align-items: stretch;
+      }
+
+      .utility-actions,
+      .shortcut-card,
+      .shortcut-card summary {
+        width: 100%;
+      }
+
+      .utility-actions .control-btn {
+        flex: 1;
+      }
+
+      .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .overview-card {
+        min-height: auto;
+        padding: 14px;
+      }
+
+      .overview-card strong {
+        font-size: 28px;
+      }
+
+      .nav {
+        width: 100%;
+        margin-bottom: 28px;
+        justify-content: flex-start;
+      }
+
+      .section-heading {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 22px;
+      }
+
+      .section-heading p {
+        max-width: none;
+      }
+
+      .phase-card {
+        padding: 14px 16px;
+      }
+
+      .phase {
+        gap: 16px;
+      }
+
+      .phase-top {
+        flex-direction: column;
+      }
+
+      .phase-meta {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .quiz-card {
+        padding: 20px;
+      }
+
+      .nav-btn {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .checklist-progress {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .site-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .countdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .countdown-unit {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .countdown-unit:last-child {
+        border-bottom: 0;
+      }
+
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .overview-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 6px 12px;
+      }
+
+      .overview-card strong {
+        margin-top: 0;
+      }
+
+      .overview-label {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff !important;
+        color: #111 !important;
+      }
+
+      body::before,
+      .hero-panel,
+      .utility-bar,
+      .share-status,
+      .overview-grid,
+      .nav,
+      .checklist-actions,
+      .checklist-status,
+      .site-footer {
+        display: none !important;
+      }
+
+      .app {
+        max-width: none;
+        padding: 0;
+      }
+
+      .header {
+        display: block;
+        margin-bottom: 18px;
+        text-align: left;
+      }
+
+      .section {
+        display: none !important;
+        animation: none !important;
+      }
+
+      #tab-checklist {
+        display: block !important;
+        max-width: none;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading h2,
+      .check-label,
+      .checklist-prog-count {
+        color: #111 !important;
+      }
+
+      .section-heading p,
+      .checklist-intro,
+      .check-sublabel,
+      .checklist-prog-label {
+        color: #444 !important;
+      }
+
+      .checklist-progress,
+      .check-item {
+        box-shadow: none;
+        border-color: #ddd;
+        background: #fff;
+        break-inside: avoid;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="header">
+      <div class="header-copy">
+        <div class="header-badge">Civic Education</div>
+        <h1>How <span>Elections</span> Work</h1>
+        <p>An interactive guide to understanding the election process - from voter registration to final certification.
+        </p>
+        <div class="utility-bar" aria-label="Page tools">
+          <div class="utility-actions">
+            <button type="button" class="control-btn" id="theme-toggle" aria-pressed="false" onclick="toggleTheme()">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3v2"></path>
+                  <path d="M12 19v2"></path>
+                  <path d="M5 12H3"></path>
+                  <path d="M21 12h-2"></path>
+                  <path d="m5.6 5.6 1.4 1.4"></path>
+                  <path d="m17 17 1.4 1.4"></path>
+                  <path d="m18.4 5.6-1.4 1.4"></path>
+                  <path d="m7 17-1.4 1.4"></path>
+                  <circle cx="12" cy="12" r="4"></circle>
+                </svg>
+              </span>
+              <span id="theme-label">Light mode</span>
+            </button>
+            <button type="button" class="control-btn" id="share-btn" onclick="shareGuide()">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <path d="m8.6 10.6 6.8-4.2"></path>
+                  <path d="m8.6 13.4 6.8 4.2"></path>
+                </svg>
+              </span>
+              Share
+            </button>
+          </div>
+          <details class="shortcut-card" id="shortcut-card">
+            <summary>
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <path d="M7 9h.01"></path>
+                  <path d="M11 9h.01"></path>
+                  <path d="M15 9h.01"></path>
+                  <path d="M7 13h10"></path>
+                </svg>
+              </span>
+              Shortcuts
+            </summary>
+            <div class="shortcut-panel">
+              <div class="shortcut-row"><span>Open sections</span><span><kbd>1</kbd> - <kbd>5</kbd></span></div>
+              <div class="shortcut-row"><span>Focus search</span><kbd>/</kbd></div>
+              <div class="shortcut-row"><span>Toggle theme</span><kbd>T</kbd></div>
+              <div class="shortcut-row"><span>Share guide</span><kbd>S</kbd></div>
+            </div>
+          </details>
+        </div>
+        <div class="share-status" id="share-status" aria-live="polite"></div>
+      </div>
+      <aside class="hero-panel" aria-label="Current guide status">
+        <div class="hero-panel-label">Current Focus</div>
+        <div class="hero-panel-title" id="current-stage">Voting Period</div>
+        <div class="hero-panel-meta" id="current-stage-meta">Voting is scheduled for April 23 and April 27, with results
+          on May 4.</div>
+        <div class="hero-panel-bar" aria-hidden="true"><span id="current-stage-fill"></span></div>
+        <div class="countdown-timer" aria-label="Countdown to next election milestone">
+          <span class="countdown-label" id="countdown-label">Next voting date: Apr 23, 2026</span>
+          <div class="countdown-grid">
+            <span class="countdown-unit">
+              <strong class="countdown-number" id="countdown-days">0</strong>
+              <span class="countdown-caption">Days</span>
+            </span>
+            <span class="countdown-unit">
+              <strong class="countdown-number" id="countdown-hours">0</strong>
+              <span class="countdown-caption">Hours</span>
+            </span>
+            <span class="countdown-unit">
+              <strong class="countdown-number" id="countdown-mins">0</strong>
+              <span class="countdown-caption">Mins</span>
+            </span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="overview-grid" aria-label="Guide overview">
+      <div class="overview-card">
+        <span class="overview-top">
+          <span class="overview-kicker">Roadmap</span>
+          <span class="overview-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 19V5"></path>
+              <path d="M4 6h8l-1 4h8l-1 4H4"></path>
+            </svg>
+          </span>
+        </span>
+        <strong id="phase-count">0</strong>
+        <span class="overview-label">process phases</span>
+      </div>
+      <div class="overview-card">
+        <span class="overview-top">
+          <span class="overview-kicker">Answers</span>
+          <span class="overview-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+              <path d="M9 9h6"></path>
+              <path d="M9 13h4"></path>
+            </svg>
+          </span>
+        </span>
+        <strong id="faq-count">0</strong>
+        <span class="overview-label">common questions</span>
+      </div>
+      <div class="overview-card">
+        <span class="overview-top">
+          <span class="overview-kicker">Terms</span>
+          <span class="overview-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path>
+              <path d="M8 7h8"></path>
+              <path d="M8 11h6"></path>
+            </svg>
+          </span>
+        </span>
+        <strong id="term-count">0</strong>
+        <span class="overview-label">glossary entries</span>
+      </div>
+      <div class="overview-card">
+        <span class="overview-top">
+          <span class="overview-kicker">Checklist</span>
+          <span class="overview-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </span>
+        </span>
+        <strong id="task-count">0</strong>
+        <span class="overview-label">preparation steps</span>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Guide sections">
+      <button type="button" class="nav-btn active" data-tab="timeline" aria-current="page"
+        onclick="switchTab('timeline')">Timeline</button>
+      <button type="button" class="nav-btn" data-tab="faq" onclick="switchTab('faq')">FAQ</button>
+      <button type="button" class="nav-btn" data-tab="glossary" onclick="switchTab('glossary')">Glossary</button>
+      <button type="button" class="nav-btn" data-tab="quiz" onclick="switchTab('quiz')">Quiz Yourself</button>
+      <button type="button" class="nav-btn" data-tab="checklist" onclick="switchTab('checklist')">Voter
+        Checklist</button>
+    </nav>
+
+    <!-- TIMELINE -->
+    <div id="tab-timeline" class="section active">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">Roadmap</div>
+          <h2>Election Timeline</h2>
+        </div>
+        <p>Registration, voting, counting, and certification in one clear process flow.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-spine"></div>
+        <div id="phases-container"></div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="tab-faq" class="section">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">Answers</div>
+          <h2>Common Questions</h2>
+        </div>
+        <p>Eligibility, ballots, counting, security, and final results explained plainly.</p>
+      </div>
+      <div class="search-field">
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m16.5 16.5 4 4"></path>
+          </svg>
+        </span>
+        <input class="search-input" id="faq-search" aria-label="Search common questions" placeholder="Search FAQ..."
+          oninput="filterFAQ(this.value)" />
+      </div>
+      <div class="filter-meta" id="faq-result-count" aria-live="polite"></div>
+      <div class="faq-list" id="faq-container"></div>
+    </div>
+
+    <!-- GLOSSARY -->
+    <div id="tab-glossary" class="section">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">Reference</div>
+          <h2>Election Terms</h2>
+        </div>
+        <p>Plain-language definitions for the words that show up throughout an election cycle.</p>
+      </div>
+      <div class="search-field">
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m16.5 16.5 4 4"></path>
+          </svg>
+        </span>
+        <input class="glossary-search" id="gloss-search" aria-label="Search election terms"
+          placeholder="Search terms..." oninput="filterGlossary(this.value)" />
+      </div>
+      <div class="filter-meta" id="glossary-result-count" aria-live="polite"></div>
+      <div class="glossary-grid" id="glossary-container"></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="tab-quiz" class="section">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">Practice</div>
+          <h2>Check Your Understanding</h2>
+        </div>
+        <p>Short questions that reinforce the major ideas behind voting and counting.</p>
+      </div>
+      <div class="quiz-wrap">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-fill"></div>
+        </div>
+        <div class="quiz-card" id="quiz-card"></div>
+        <div class="quiz-result" id="quiz-result">
+          <div class="result-score" id="result-score"></div>
+          <div class="result-label">out of <span id="result-total"></span> questions</div>
+          <div class="result-msg" id="result-msg"></div>
+          <button type="button" class="quiz-restart" onclick="startQuiz()">Try Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div id="tab-checklist" class="section">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">Prepare</div>
+          <h2>Voter Checklist</h2>
+        </div>
+        <p>Steps for before, during, and after the April voting dates.</p>
+      </div>
+      <p class="checklist-intro">Use this checklist to make sure you're fully prepared to participate in an election.
+        Check off each step as you complete it.</p>
+      <div class="checklist-actions" aria-label="Checklist actions">
+        <button type="button" class="control-btn" onclick="printChecklist()">
+          <span class="button-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 9V2h12v7"></path>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <path d="M6 14h12v8H6z"></path>
+            </svg>
+          </span>
+          Print
+        </button>
+        <button type="button" class="control-btn" onclick="exportChecklist()">
+          <span class="button-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3v12"></path>
+              <path d="m7 10 5 5 5-5"></path>
+              <path d="M5 21h14"></path>
+            </svg>
+          </span>
+          Export
+        </button>
+      </div>
+      <div class="checklist-status" id="checklist-status" aria-live="polite"></div>
+      <div class="checklist-progress">
+        <div class="checklist-prog-text">
+          <div class="checklist-prog-label">Your progress</div>
+          <div class="checklist-prog-bar">
+            <div class="checklist-prog-fill" id="prog-fill"></div>
+          </div>
+        </div>
+        <div class="checklist-prog-count"><span id="prog-count">0</span> / <span id="prog-total"></span></div>
+      </div>
+      <div id="checklist-container"></div>
+    </div>
+
+    <footer class="site-footer">
+      <span>@2026Election | Created by Ritam Das</span>
+      <button type="button" class="footer-link" onclick="switchTab('faq')">Review FAQ</button>
+    </footer>
+
+  </div>
+
+  <script>
+    // ── DATA ──────────────────────────────────────────────────────────────────
+
+    const phases = [
+      {
+        status: 'done',
+        number: '01',
+        title: 'Voter Registration',
+        timing: 'Weeks–months before election',
+        desc: 'Eligible citizens must register with election authorities before the registration deadline. Depending on jurisdiction, registration can be done online, by mail, or in person at government offices.',
+        details: [
+          { label: 'Typical deadline', value: '15–30 days before election' },
+          { label: 'Methods', value: 'Online, mail, in-person' },
+          { label: 'Who registers', value: 'Eligible citizens / residents' },
+        ],
+        tags: [{ text: 'Voter action required', type: 'blue' }, { text: 'Deadline-sensitive', type: 'amber' }],
+      },
+      {
+        status: 'done',
+        number: '02',
+        title: 'Candidate Filing',
+        timing: 'Months before election',
+        desc: 'Candidates formally declare their intent to run by submitting legal paperwork, paying filing fees, or gathering required petition signatures. Election authorities verify eligibility before placing candidates on the ballot.',
+        details: [
+          { label: 'Required', value: 'Filing fee or signatures' },
+          { label: 'Verified by', value: 'Election commission' },
+          { label: 'Outcome', value: 'Official ballot placement' },
+        ],
+        tags: [{ text: 'Official process', type: '' }, { text: 'Candidate-driven', type: '' }],
+      },
+      {
+        status: 'done',
+        number: '03',
+        title: 'Primary Elections',
+        timing: '3–6 months before general election',
+        desc: 'In systems with multiple parties, primaries allow party members to vote for their preferred candidate. Winners advance to represent their party in the general election. Some jurisdictions use caucuses instead.',
+        details: [
+          { label: 'Type', value: 'Party or open primary' },
+          { label: 'Runoff', value: 'If no majority, runoff held' },
+          { label: 'Alternative', value: 'Caucus or convention' },
+        ],
+        tags: [{ text: 'Voter action required', type: 'blue' }, { text: 'Party-based', type: 'teal' }],
+      },
+      {
+        status: 'done',
+        number: '04',
+        title: 'Campaigning Period',
+        timing: 'Before Apr 23, 2026',
+        desc: 'Candidates campaign to build voter support through rallies, debates, advertisements, door-knocking, and media appearances. This phase leads into the April 23 and April 27 voting dates.',
+        details: [
+          { label: 'Duration', value: 'Weeks to months' },
+          { label: 'Regulated by', value: 'Campaign finance law' },
+          { label: 'Key events', value: 'Debates, rallies, ads' },
+        ],
+        tags: [{ text: 'Public engagement', type: 'green' }, { text: 'Media-heavy', type: '' }],
+      },
+      {
+        status: 'done',
+        number: '05',
+        title: 'Early & Absentee Voting',
+        timing: 'Before voting dates',
+        desc: 'Many jurisdictions open early voting locations and allow mail-in or absentee ballots to reduce congestion on election day and expand access for those who cannot vote in person on the official date.',
+        details: [
+          { label: 'Request deadline', value: 'Varies by state/country' },
+          { label: 'Return method', value: 'Mail, dropbox, in-person' },
+          { label: 'Who can use', value: 'Varies — some universal' },
+        ],
+        tags: [{ text: 'Voter action required', type: 'blue' }, { text: 'Accessibility', type: 'green' }],
+      },
+      {
+        status: 'current',
+        number: '06',
+        title: 'Voting Period',
+        timing: 'Apr 23 and Apr 27, 2026',
+        desc: 'Registered voters cast their ballots on the scheduled voting dates: April 23 and April 27, 2026. Poll workers support the process and observers help monitor transparency.',
+        details: [
+          { label: 'Voting dates', value: 'Apr 23 and Apr 27, 2026' },
+          { label: 'ID required', value: 'Varies by jurisdiction' },
+          { label: 'Monitored by', value: 'Poll workers + observers' },
+        ],
+        tags: [{ text: 'Voter action required', type: 'blue' }, { text: 'Key day', type: 'amber' }],
+      },
+      {
+        status: 'upcoming',
+        number: '07',
+        title: 'Vote Counting & Canvassing',
+        timing: 'Apr 27 to May 4, 2026',
+        desc: 'Ballots are tallied by election officials after voting closes. Counting and checks continue until the result date on May 4, 2026.',
+        details: [
+          { label: 'Provisional ballots', value: 'Counted after verification' },
+          { label: 'Result date', value: 'May 4, 2026' },
+          { label: 'Transparency', value: 'Public observers allowed' },
+        ],
+        tags: [{ text: 'Official process', type: '' }, { text: 'Transparency', type: 'green' }],
+      },
+      {
+        status: 'upcoming',
+        number: '08',
+        title: 'Results & Certification',
+        timing: 'May 4, 2026',
+        desc: 'Results are scheduled for May 4, 2026. After counting and any required checks are complete, election officials declare and certify the outcome.',
+        details: [
+          { label: 'Certification by', value: 'Election board / authority' },
+          { label: 'Challenges', value: 'Recount if margin is close' },
+          { label: 'Result date', value: 'May 4, 2026' },
+        ],
+        tags: [{ text: 'Official process', type: '' }, { text: 'Final step', type: 'amber' }],
+      },
+    ];
+
+    const faqs = [
+      { q: 'Who is eligible to vote?', a: 'Eligibility varies by country but typically requires citizenship, a minimum age (usually 18), and residency in the jurisdiction. Some places restrict voting for people with certain criminal convictions or those under legal guardianship.' },
+      { q: 'What is the difference between a primary and a general election?', a: 'A primary election is held within a party to choose its candidate for a general election. The general election then pits candidates from different parties (and independent candidates) against each other to determine who holds the office.' },
+      { q: 'What happens if I miss the registration deadline?', a: 'Options vary widely. Some jurisdictions offer same-day voter registration at the polls. Others have no remedy — you must wait until the next election. Always check your local election authority\'s website well in advance.' },
+      { q: 'Why do election results sometimes take days?', a: 'Mail-in and absentee ballots require identity verification before counting. Provisional ballots must be reviewed. Some jurisdictions legally cannot begin processing mail ballots until election day. These factors can delay final tallies for days or even weeks.' },
+      { q: 'What is a provisional ballot?', a: 'A provisional ballot is given when there is a question about a voter\'s eligibility at the polls — for example, if their name doesn\'t appear on the roll. The ballot is held separately and counted only after officials confirm the voter\'s eligibility.' },
+      { q: 'What is gerrymandering?', a: 'Gerrymandering is the manipulation of electoral district boundaries to favor a particular party. It can concentrate opposing voters into one district (packing) or spread them thin across many districts (cracking), diluting their influence.' },
+      { q: 'What is the Electoral College?', a: 'The Electoral College is an indirect voting system used in US presidential elections. Citizens vote for electors pledged to a candidate. Winning a state typically awards all of its electoral votes to that candidate. A candidate must reach 270 electoral votes to win.' },
+      { q: 'What is a recount and when is it triggered?', a: 'A recount is a retally of all votes, usually triggered automatically when the margin of victory falls below a legal threshold (often 0.5%). Candidates may also request recounts in some jurisdictions, sometimes at their own expense.' },
+      { q: 'How are ballots kept secure?', a: 'Security measures include chain-of-custody procedures, tamper-evident seals on ballot boxes, bipartisan observation of counting, signature verification for mail ballots, and post-election audits using random samples.' },
+      { q: 'What is voter suppression?', a: 'Voter suppression refers to strategies that discourage or prevent specific groups from voting — such as restrictive ID laws, polling place closures, long lines, voter roll purges, or misinformation campaigns about voting times or requirements.' },
+    ];
+
+    const glossary = [
+      { term: 'Ballot', def: 'The official form used by voters to record their choices in an election, either paper or electronic.' },
+      { term: 'Canvass', def: 'The official review and verification of all ballots cast to determine the final, certified election results.' },
+      { term: 'Caucus', def: 'A local gathering where voters publicly indicate their candidate preference through grouping rather than secret ballot.' },
+      { term: 'Constituency', def: 'A geographic area whose residents are represented by a single elected official.' },
+      { term: 'Electoral College', def: 'A body of electors who formally elect the US president, chosen based on each state\'s popular vote outcome.' },
+      { term: 'Exit Poll', def: 'A survey of voters taken immediately after they exit the polling station, used to project election outcomes.' },
+      { term: 'Gerrymandering', def: 'Manipulation of electoral district boundaries to give one party an unfair advantage.' },
+      { term: 'Majority vs Plurality', def: 'A majority means over 50% of votes; a plurality means more votes than any other candidate but not necessarily a majority.' },
+      { term: 'Polling Place', def: 'An official location where registered voters go to cast their ballots on election day.' },
+      { term: 'Provisional Ballot', def: 'A ballot held separately when voter eligibility is uncertain; counted only after eligibility is confirmed.' },
+      { term: 'Primary Election', def: 'A preliminary election in which party members vote to choose their candidate for the general election.' },
+      { term: 'Recount', def: 'A retally of election ballots, triggered when the margin is very close or requested by a candidate.' },
+      { term: 'Runoff Election', def: 'A second election held when no candidate achieves the required vote threshold in the first round.' },
+      { term: 'Swing State', def: 'A jurisdiction where neither major party has a reliable advantage, making it pivotal to the overall outcome.' },
+      { term: 'Absentee Ballot', def: 'A ballot submitted by mail or early drop-off by a voter who cannot attend in person on election day.' },
+      { term: 'Poll Worker', def: 'A trained individual who staffs polling places on election day to ensure the voting process runs smoothly.' },
+      { term: 'Campaign Finance', def: 'The laws governing how money is raised and spent in political campaigns, including contribution limits and disclosure rules.' },
+      { term: 'Voter Roll', def: 'The official list of registered voters eligible to vote in a given jurisdiction for an election.' },
+    ];
+
+    const quizData = [
+      { q: 'What is the purpose of a primary election?', opts: ['To elect the final winner of an office', 'For party members to choose their candidate for the general election', 'To count provisional ballots', 'To certify the final results'], answer: 1, explain: 'A primary election lets party members vote for their preferred representative candidate. The winner advances to the general election to compete against candidates from other parties.' },
+      { q: 'What is a provisional ballot?', opts: ['A ballot cast on election day', 'A mail-in ballot', 'A ballot held separately until voter eligibility is confirmed', 'A ballot used in runoff elections only'], answer: 2, explain: 'Provisional ballots are issued when there\'s a question about voter eligibility at the polls. They\'re held separately and only counted after officials verify the voter qualifies.' },
+      { q: 'What does "gerrymandering" refer to?', opts: ['Counting votes multiple times', 'Manipulating district boundaries to favor a party', 'The process of certifying election results', 'A type of voter identification requirement'], answer: 1, explain: 'Gerrymandering is the manipulation of electoral district boundaries to give one political party an unfair advantage over another.' },
+      { q: 'Why might election results take several days to finalize?', opts: ['Election officials need to sleep', 'Mail-in and provisional ballots require additional verification time', 'Candidates must approve the count', 'Polls are open for multiple days'], answer: 1, explain: 'Mail-in ballots require signature verification and may arrive after election day in some states. Provisional ballots also need review. This naturally delays the final count.' },
+      { q: 'In the US Electoral College, how many electoral votes are needed to win the presidency?', opts: ['218', '270', '300', '538'], answer: 1, explain: 'There are 538 total electoral votes. A candidate needs at least 270 — a majority — to win the presidency. If no candidate reaches 270, the House of Representatives decides.' },
+      { q: 'What is a canvass in election terms?', opts: ['Door-to-door voter outreach by campaigns', 'The official review of all ballots to determine final certified results', 'A preliminary poll of voters before election day', 'A debate between candidates'], answer: 1, explain: 'Canvassing (in the official election sense) is the formal process by which election officials review and verify all ballots to produce the final, certified count.' },
+      { q: 'What is the difference between a plurality and a majority?', opts: ['They mean the same thing', 'A plurality is over 50%; a majority is the most votes', 'A plurality is the most votes; a majority is over 50%', 'A majority applies only to runoff elections'], answer: 2, explain: 'A plurality simply means getting more votes than any other candidate. A majority means getting more than 50% of all votes cast. Some elections require a majority; others only require a plurality.' },
+    ];
+
+    const checklistData = [
+      {
+        group: 'Before the election',
+        items: [
+          { label: 'Check your registration status', sub: 'Verify you are registered at your current address.' },
+          { label: 'Register to vote (if not yet registered)', sub: 'Complete before the registration deadline in your area.' },
+          { label: 'Find your polling place', sub: 'Look up your assigned voting location — it may have changed.' },
+          { label: 'Check what ID you need', sub: 'Requirements vary by jurisdiction. Prepare accepted documents.' },
+          { label: 'Request an absentee ballot (if needed)', sub: 'Submit your request well before the mail-in deadline.' },
+          { label: 'Research the candidates and ballot measures', sub: 'Review candidate positions, local races, and ballot propositions.' },
+        ]
+      },
+      {
+        group: 'On voting days',
+        items: [
+          { label: 'Bring required ID and any documents', sub: 'Check your jurisdiction\'s requirements before you leave.' },
+          { label: 'Go to your correct polling place', sub: 'Visiting the wrong location may result in a provisional ballot.' },
+          { label: 'Cast your ballot on Apr 23 or Apr 27', sub: 'Review your selections carefully before submitting.' },
+        ]
+      },
+      {
+        group: 'After the election',
+        items: [
+          { label: 'Track your mail-in ballot (if applicable)', sub: 'Many states allow online tracking of absentee ballot status.' },
+          { label: 'Follow results on May 4', sub: 'Results are scheduled for May 4, with certification following official checks.' },
+        ]
+      },
+    ];
+
+    const sectionOrder = ['timeline', 'faq', 'glossary', 'quiz', 'checklist'];
+    const electionMilestones = [
+      { label: 'Voting date: Apr 23, 2026', date: new Date('2026-04-23T23:59:59') },
+      { label: 'Voting date: Apr 27, 2026', date: new Date('2026-04-27T00:00:00') },
+      { label: 'Result date: May 4, 2026', date: new Date('2026-05-04T00:00:00') },
+    ];
+
+    function prefersReducedMotion() {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function setText(id, value) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = value;
+    }
+
+    function updateOverview() {
+      const currentIndex = Math.max(0, phases.findIndex(phase => phase.status === 'current'));
+      const current = phases[currentIndex] || phases[0];
+      const checklistCount = checklistData.reduce((sum, group) => sum + group.items.length, 0);
+
+      setText('phase-count', phases.length);
+      setText('faq-count', faqs.length);
+      setText('term-count', glossary.length);
+      setText('task-count', checklistCount);
+
+      if (current) {
+        const lead = current.desc.split('. ')[0] + '.';
+        setText('current-stage', current.title);
+        setText('current-stage-meta', `${current.timing}. ${lead}`);
+        const fill = document.getElementById('current-stage-fill');
+        if (fill) fill.style.width = `${Math.round(((currentIndex + 1) / phases.length) * 100)}%`;
+      }
+    }
+
+    // ── BUILD TIMELINE ────────────────────────────────────────────────────────
+    function buildTimeline() {
+      const container = document.getElementById('phases-container');
+      phases.forEach((p) => {
+        const div = document.createElement('div');
+        div.className = 'phase ' + p.status;
+        div.tabIndex = 0;
+        div.setAttribute('role', 'button');
+        div.setAttribute('aria-expanded', 'false');
+        div.setAttribute('aria-label', `Phase ${p.number}: ${p.title}`);
+        div.innerHTML = `
+      <div class="phase-dot-col"><div class="phase-dot"></div></div>
+      <div class="phase-content">
+        <div class="phase-card">
+          <div class="phase-top">
+            <div>
+              <div class="phase-title-row">
+                <span class="phase-number">Phase ${p.number}</span>
+                <span class="phase-badge badge-${p.status === 'current' ? 'current' : p.status === 'done' ? 'done' : 'upcoming'}">${p.status === 'current' ? 'In progress' : p.status === 'done' ? 'Complete' : 'Upcoming'}</span>
+              </div>
+              <div class="phase-title">${p.title}</div>
+            </div>
+            <div class="phase-meta">
+              <span class="phase-timing">${p.timing}</span>
+              <span class="chevron">▾</span>
+            </div>
+          </div>
+          <div class="phase-body">
+            <p class="phase-desc">${p.desc}</p>
+            <div class="phase-details">
+              ${p.details.map(d => `<div class="detail-pill"><strong>${d.label}</strong><span>${d.value}</span></div>`).join('')}
+            </div>
+            <div class="phase-tags">
+              ${p.tags.map(t => `<span class="tag ${t.type}">${t.text}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+        const togglePhase = () => {
+          const wasExpanded = div.classList.contains('expanded');
+          document.querySelectorAll('.phase').forEach(el => {
+            el.classList.remove('expanded');
+            el.setAttribute('aria-expanded', 'false');
+          });
+          if (!wasExpanded) {
+            div.classList.add('expanded');
+            div.setAttribute('aria-expanded', 'true');
+          }
+        };
+        div.addEventListener('click', togglePhase);
+        div.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            togglePhase();
+          }
+        });
+        container.appendChild(div);
+      });
+      // Auto-expand current
+      const current = document.querySelector('.phase.current');
+      if (current) {
+        current.classList.add('expanded');
+        current.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // ── BUILD FAQ ─────────────────────────────────────────────────────────────
+    function buildFAQ() {
+      renderFAQ(faqs);
+    }
+
+    function renderFAQ(items) {
+      const container = document.getElementById('faq-container');
+      container.innerHTML = '';
+      setText('faq-result-count', `${items.length} of ${faqs.length} questions shown`);
+
+      if (!items.length) {
+        container.innerHTML = '<div class="empty-state">No FAQ matches found.</div>';
+        return;
+      }
+
+      items.forEach((f, index) => {
+        const div = document.createElement('div');
+        const qId = `faq-q-${index}`;
+        const aId = `faq-a-${index}`;
+        div.className = 'faq-item';
+        div.innerHTML = `
+      <button type="button" class="faq-q" id="${qId}" aria-expanded="false" aria-controls="${aId}">
+        <span>${f.q}</span>
+        <span class="faq-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="${aId}" role="region" aria-labelledby="${qId}">${f.a}</div>
+    `;
+        const question = div.querySelector('.faq-q');
+        question.addEventListener('click', () => {
+          const wasOpen = div.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(el => {
+            el.classList.remove('open');
+            el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!wasOpen) {
+            div.classList.add('open');
+            question.setAttribute('aria-expanded', 'true');
+          }
+        });
+        container.appendChild(div);
+      });
+    }
+
+    function filterFAQ(q) {
+      const lower = q.trim().toLowerCase();
+      const filtered = lower
+        ? faqs.filter(f => f.q.toLowerCase().includes(lower) || f.a.toLowerCase().includes(lower))
+        : faqs;
+      renderFAQ(filtered);
+    }
+
+    // ── BUILD GLOSSARY ────────────────────────────────────────────────────────
+    function buildGlossary() {
+      renderGlossary(glossary);
+    }
+    function renderGlossary(items) {
+      const container = document.getElementById('glossary-container');
+      container.innerHTML = '';
+      setText('glossary-result-count', `${items.length} of ${glossary.length} terms shown`);
+      if (!items.length) {
+        container.innerHTML = '<div class="glossary-empty">No terms found.</div>';
+        return;
+      }
+      items.forEach(g => {
+        const div = document.createElement('div');
+        div.className = 'gloss-card';
+        div.innerHTML = `<div class="gloss-term">${g.term}</div><div class="gloss-def">${g.def}</div>`;
+        container.appendChild(div);
+      });
+    }
+    function filterGlossary(q) {
+      const lower = q.trim().toLowerCase();
+      const filtered = lower
+        ? glossary.filter(g => g.term.toLowerCase().includes(lower) || g.def.toLowerCase().includes(lower))
+        : glossary;
+      renderGlossary(filtered);
+    }
+
+    // ── BUILD QUIZ ────────────────────────────────────────────────────────────
+    let quizIndex = 0, quizScore = 0, quizAnswered = false;
+    function startQuiz() {
+      quizIndex = 0; quizScore = 0; quizAnswered = false;
+      document.getElementById('quiz-result').classList.remove('show');
+      document.getElementById('quiz-card').style.display = 'block';
+      document.getElementById('quiz-fill').closest('.quiz-progress-bar').style.display = 'block';
+      renderQuestion();
+    }
+    function renderQuestion() {
+      const q = quizData[quizIndex];
+      const total = quizData.length;
+      document.getElementById('quiz-fill').style.width = ((quizIndex / total) * 100) + '%';
+      const card = document.getElementById('quiz-card');
+      card.innerHTML = `
+    <div class="quiz-counter">Question ${quizIndex + 1} of ${total}</div>
+    <div class="quiz-question">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((opt, i) => `<button type="button" class="quiz-opt" data-idx="${i}" onclick="answerQuiz(${i})">${opt}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qfeedback"></div>
+    <button type="button" class="quiz-next" id="qnext" onclick="nextQuestion()">${quizIndex + 1 < total ? 'Next question' : 'See results'}</button>
+  `;
+    }
+    function answerQuiz(idx) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      const q = quizData[quizIndex];
+      const opts = document.querySelectorAll('.quiz-opt');
+      opts.forEach(b => b.disabled = true);
+      opts[q.answer].classList.add('correct');
+      const fb = document.getElementById('qfeedback');
+      if (idx === q.answer) {
+        quizScore++;
+        fb.className = 'quiz-feedback correct-fb show';
+        fb.textContent = '✓ Correct! ' + q.explain;
+      } else {
+        opts[idx].classList.add('wrong');
+        fb.className = 'quiz-feedback wrong-fb show';
+        fb.textContent = '✗ Not quite. ' + q.explain;
+      }
+      document.getElementById('qnext').classList.add('show');
+    }
+    function nextQuestion() {
+      quizIndex++;
+      quizAnswered = false;
+      if (quizIndex >= quizData.length) {
+        document.getElementById('quiz-card').style.display = 'none';
+        document.getElementById('quiz-fill').closest('.quiz-progress-bar').style.display = 'none';
+        const res = document.getElementById('quiz-result');
+        res.classList.add('show');
+        document.getElementById('result-score').textContent = quizScore;
+        document.getElementById('result-total').textContent = quizData.length;
+        const pct = quizScore / quizData.length;
+        document.getElementById('result-msg').textContent =
+          pct === 1 ? 'Perfect score! You have a strong understanding of the election process.' :
+            pct >= 0.7 ? 'Great work! You know the fundamentals well. Review the timeline for any gaps.' :
+              'Good effort! Explore the Timeline and FAQ sections to strengthen your knowledge.';
+      } else {
+        renderQuestion();
+      }
+    }
+
+    // ── BUILD CHECKLIST ───────────────────────────────────────────────────────
+    let checkStates = {};
+    function buildChecklist() {
+      const container = document.getElementById('checklist-container');
+      let totalItems = 0;
+      checklistData.forEach((group, gi) => {
+        const gDiv = document.createElement('div');
+        gDiv.className = 'checklist-group';
+        gDiv.innerHTML = `<div class="checklist-group-title">${group.group}</div><div class="check-items" id="group-${gi}"></div>`;
+        container.appendChild(gDiv);
+        const itemsDiv = gDiv.querySelector('.check-items');
+        group.items.forEach((item, ii) => {
+          const key = `${gi}-${ii}`;
+          checkStates[key] = false;
+          totalItems++;
+          const div = document.createElement('div');
+          div.className = 'check-item';
+          div.dataset.key = key;
+          div.innerHTML = `
+        <div class="check-box" id="cb-${key}"></div>
+        <div class="check-text-wrap">
+          <div class="check-label">${item.label}</div>
+          <div class="check-sublabel">${item.sub}</div>
+        </div>
+      `;
+          div.addEventListener('click', () => toggleCheck(key, div));
+          itemsDiv.appendChild(div);
+        });
+      });
+      document.getElementById('prog-total').textContent = totalItems;
+      updateChecklistProgress();
+    }
+    function toggleCheck(key, div) {
+      checkStates[key] = !checkStates[key];
+      div.classList.toggle('checked', checkStates[key]);
+      document.getElementById('cb-' + key).textContent = checkStates[key] ? '✓' : '';
+      updateChecklistProgress();
+    }
+    function updateChecklistProgress() {
+      const done = Object.values(checkStates).filter(Boolean).length;
+      const total = Object.keys(checkStates).length;
+      document.getElementById('prog-count').textContent = done;
+      document.getElementById('prog-fill').style.width = total ? (done / total * 100) + '%' : '0%';
+    }
+
+    function formatChecklistForExport() {
+      const lines = ['Election Voter Checklist', ''];
+      checklistData.forEach((group, gi) => {
+        lines.push(group.group);
+        group.items.forEach((item, ii) => {
+          const checked = checkStates[`${gi}-${ii}`] ? 'x' : ' ';
+          lines.push(`[${checked}] ${item.label}`);
+          lines.push(`    ${item.sub}`);
+        });
+        lines.push('');
+      });
+      return lines.join('\n');
+    }
+
+    function printChecklist() {
+      switchTab('checklist', false);
+      setText('checklist-status', 'Preparing checklist for print.');
+      setTimeout(() => window.print(), 120);
+    }
+
+    function exportChecklist() {
+      const blob = new Blob([formatChecklistForExport()], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'election-voter-checklist.txt';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      setText('checklist-status', 'Checklist exported as a text file.');
+    }
+
+    // ── NAVIGATION ────────────────────────────────────────────────────────────
+    function switchTab(name, shouldScroll = true) {
+      const target = document.getElementById('tab-' + name);
+      if (!target) return;
+
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach((button) => {
+        const isActive = button.dataset.tab === name;
+        button.classList.toggle('active', isActive);
+        if (isActive) {
+          button.setAttribute('aria-current', 'page');
+          button.scrollIntoView({
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+            block: 'nearest',
+            inline: 'center'
+          });
+        } else {
+          button.removeAttribute('aria-current');
+        }
+      });
+      target.classList.add('active');
+
+      if (shouldScroll) {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+            block: 'start'
+          });
+        });
+      }
+    }
+
+    // ── INIT ──────────────────────────────────────────────────────────────────
+    function getStoredTheme() {
+      try {
+        return localStorage.getItem('election-guide-theme');
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function setStoredTheme(theme) {
+      try {
+        localStorage.setItem('election-guide-theme', theme);
+      } catch (error) {
+        // Theme still works for this page when storage is blocked.
+      }
+    }
+
+    function applyTheme(theme) {
+      const nextTheme = theme === 'light' ? 'light' : 'dark';
+      document.body.dataset.theme = nextTheme;
+      setStoredTheme(nextTheme);
+      const isLight = nextTheme === 'light';
+      const button = document.getElementById('theme-toggle');
+      if (button) button.setAttribute('aria-pressed', String(isLight));
+      setText('theme-label', isLight ? 'Dark mode' : 'Light mode');
+    }
+
+    function toggleTheme() {
+      applyTheme(document.body.dataset.theme === 'light' ? 'dark' : 'light');
+    }
+
+    function updateCountdown() {
+      const now = Date.now();
+      const nextMilestone = electionMilestones.find(milestone => milestone.date.getTime() >= now) || electionMilestones[electionMilestones.length - 1];
+      const diff = Math.max(0, nextMilestone.date.getTime() - now);
+      const totalMinutes = Math.floor(diff / 60000);
+      const days = Math.floor(totalMinutes / 1440);
+      const hours = Math.floor((totalMinutes % 1440) / 60);
+      const mins = totalMinutes % 60;
+      setText('countdown-label', nextMilestone.label);
+      setText('countdown-days', days);
+      setText('countdown-hours', hours);
+      setText('countdown-mins', mins);
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      return copied ? Promise.resolve() : Promise.reject(new Error('Copy failed'));
+    }
+
+    async function shareGuide() {
+      const shareData = {
+        title: document.title,
+        text: 'Election Process Guide',
+        url: window.location.href
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          setText('share-status', 'Share sheet opened.');
+        } else {
+          await copyToClipboard(window.location.href);
+          setText('share-status', 'Link copied to clipboard.');
+        }
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          setText('share-status', 'Sharing is not available in this browser.');
+        }
+      }
+    }
+
+    function focusActiveSearch() {
+      const active = document.querySelector('.section.active');
+      const input = active ? active.querySelector('.search-input, .glossary-search') : null;
+      if (input) {
+        input.focus();
+      } else {
+        switchTab('faq');
+        setTimeout(() => document.getElementById('faq-search')?.focus(), 120);
+      }
+    }
+
+    function setupShortcuts() {
+      document.addEventListener('keydown', (event) => {
+        const target = event.target;
+        const isTyping = target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+        if (isTyping) return;
+
+        if (/^[1-5]$/.test(event.key)) {
+          event.preventDefault();
+          switchTab(sectionOrder[Number(event.key) - 1]);
+        } else if (event.key === '/') {
+          event.preventDefault();
+          focusActiveSearch();
+        } else if (event.key.toLowerCase() === 't') {
+          event.preventDefault();
+          toggleTheme();
+        } else if (event.key.toLowerCase() === 's') {
+          event.preventDefault();
+          shareGuide();
+        } else if (event.key === '?') {
+          event.preventDefault();
+          const shortcuts = document.getElementById('shortcut-card');
+          if (shortcuts) shortcuts.open = !shortcuts.open;
+        }
+      });
+    }
+
+    applyTheme(getStoredTheme() || 'dark');
+    updateOverview();
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+    buildTimeline();
+    buildFAQ();
+    buildGlossary();
+    startQuiz();
+    buildChecklist();
+    setupShortcuts();
+  </script>
+</body>
+
+</html>
